@@ -1,0 +1,23 @@
+{
+  "components": [
+    {
+      "label": "Text field",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0kbxtdv",
+        "columns": null
+      },
+      "id": "Field_0v4uden",
+      "key": "textfield_pt49te"
+    }
+  ],
+  "type": "default",
+  "id": "RegisterForm",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.4.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.19.0"
+  },
+  "schemaVersion": 14
+}
