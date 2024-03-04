@@ -23,7 +23,7 @@ object EvalAISession {
         val url = "$baseUrl/api/auth/login/"
 
         val data = Json.encodeToString(
-            AuthBody("username", "password")
+            AuthBody("admin", "password")
         )
         println(data)
         val request = Request.Builder()
@@ -35,13 +35,16 @@ object EvalAISession {
             val body = response.body?.string()!!
             println("auth")
             println(body)
-            token = Json.parseToJsonElement(body).jsonObject["key"]!!.toString()
+
+            token = Json.parseToJsonElement(body).jsonObject["token"]!!.jsonPrimitive.content
             println("TOKEN: $token")
+//            doGet("/api/accounts/user/get_auth_token")
         } catch (e: Exception) {
             token = ""
             println(e)
         }
     }
+
     fun doPost(url: String, data: String): String {
         if (token == "") {
             doAuth()
@@ -54,12 +57,32 @@ object EvalAISession {
         try {
             val response = client.newCall(request).execute()
             val body = response.body?.string()!!
-            println("DOPOST")
+            println("DOPOST $url")
             println(body)
             return body
         } catch (e: Exception) {
             println(e)
             return "" 
+        }
+    }
+    fun doGet(url: String): String {
+        if (token == "") {
+            doAuth()
+        }
+        val request = Request.Builder()
+            .url("$baseUrl$url")
+            .addHeader("Authorization", "Token $token")
+            .get()
+            .build()
+        try {
+            val response = client.newCall(request).execute()
+            val body = response.body?.string()!!
+            println("DOGET $url")
+            println(body)
+            return body
+        } catch (e: Exception) {
+            println(e)
+            return ""
         }
     }
 }

@@ -18,11 +18,11 @@ import ru.i3cheese.camundakotlin.evalai.EvalAISession
 @Component
 class CreateChallengeHostTeam: JavaDelegate {
     @Serializable
-    private data class ChallengeHostTeamBody(val test_team_name: String, val team_team_url: String)
+    private data class ChallengeHostTeamBody(val team_name: String, val team_url: String)
     override fun execute(execution: DelegateExecution) {
-        val response = EvalAISession.doPost("/api/hosts/challenge_host_team/internal",
+        val response = EvalAISession.doPost("/api/hosts/challenge_host_team/",
             Json.encodeToString(
-                ChallengeHostTeamBody("test_team_name", "team_team_url")
+                ChallengeHostTeamBody("test_team_name", "test_team_url")
             )
         )
         println(response)

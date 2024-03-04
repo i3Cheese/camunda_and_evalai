@@ -28,7 +28,7 @@ from .serializers import (
 
 @api_view(["POST"])
 @permission_classes((permissions.IsAuthenticated, IsInternalAccount))
-@authentication_classes((JWTAuthentication, ExpiringTokenAuthentication))
+@authentication_classes((JWTAuthentication, ))
 def create_challenge_host_team(request):
     serializer = ChallengeHostTeamSerializer(
         data=request.data, context={"request": request}
