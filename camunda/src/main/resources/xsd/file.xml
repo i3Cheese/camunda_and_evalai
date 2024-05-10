@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<newOrganizationApplication xmlns="camundakotlin"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="camundakotlin  NewOrganizationApplication.xsd"
+>
+	<organizationInfo>
+		<name>Pepsico</name>
+		<address>Here</address>
+		<phone>+78000000000</phone>
+		<email>example@example.com</email>
+	</organizationInfo>
+	<organizationContactPerson>
+		<name>Cheese</name>
+		<position>CTO</position>
+		<phone>+78000000000</phone>
+		<email>example@example.com</email>
+	</organizationContactPerson>
+</newOrganizationApplication>

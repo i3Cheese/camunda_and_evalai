@@ -1,0 +1,23 @@
+{
+  "components": [
+    {
+      "label": "XmlString",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_02xgps4",
+        "columns": null
+      },
+      "id": "Field_0p3j8dl",
+      "key": "xmlNewOrganizationApplication"
+    }
+  ],
+  "type": "default",
+  "id": "newOrganizationApplication",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.19.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.20.0",
+  "schemaVersion": 14
+}

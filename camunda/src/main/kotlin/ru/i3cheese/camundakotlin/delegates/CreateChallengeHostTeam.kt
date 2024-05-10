@@ -9,6 +9,7 @@ import org.camunda.bpm.engine.variable.value.StringValue
 import org.camunda.bpm.engine.variable.value.TypedValue
 import org.springframework.stereotype.Component
 import ru.i3cheese.camundakotlin.evalai.EvalAISession
+import ru.i3cheese.camundakotlin.xml.utils.XMLUtils
 
 
 @Component
@@ -16,6 +17,9 @@ class CreateChallengeHostTeam: JavaDelegate {
     @Serializable
     private data class ChallengeHostTeamBody(val team_name: String, val team_url: String)
     override fun execute(execution: DelegateExecution) {
+        println("hi");
+        return
+        val obj = XMLUtils.unmarshal<ru.i3cheese.camundakotlin.xml.genmodel.Root>("something");
         val teamName: String = execution.getVariableTyped<StringValue>("teamName", true).value;
         println("Creating team $teamName")
         val response = EvalAISession.doPost("/api/hosts/challenge_host_team/",

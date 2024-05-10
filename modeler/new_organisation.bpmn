@@ -14,7 +14,7 @@
   </bpmn:collaboration>
   <bpmn:process id="Process_1vw4kv4" isExecutable="true" camunda:historyTimeToLive="180">
     <bpmn:laneSet id="LaneSet_0vxv4fh" />
-    <bpmn:startEvent id="StartEvent_1" name="Подана заявка">
+    <bpmn:startEvent id="StartEvent_1" name="Подана заявка" camunda:formRef="deployment:newOrganizationApplication.form" camunda:formRefBinding="latest">
       <bpmn:outgoing>Flow_1h90yw2</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:serviceTask id="Activity_1mpdnvg" name="Проверка организации">
@@ -157,13 +157,6 @@
         <di:waypoint x="870" y="467" />
         <di:waypoint x="895" y="467" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1cget9h_di" bpmnElement="Flow_1cget9h">
-        <di:waypoint x="480" y="492" />
-        <di:waypoint x="480" y="540" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="490" y="500" width="60" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0i6rlcg_di" bpmnElement="Flow_0i6rlcg">
         <di:waypoint x="945" y="467" />
         <di:waypoint x="1020" y="467" />
@@ -179,13 +172,20 @@
         <di:waypoint x="1290" y="467" />
         <di:waypoint x="1332" y="467" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1w5o951_di" bpmnElement="Flow_1w5o951">
-        <di:waypoint x="530" y="580" />
-        <di:waypoint x="552" y="580" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1bbnp3k_di" bpmnElement="Flow_1bbnp3k">
         <di:waypoint x="920" y="492" />
         <di:waypoint x="920" y="540" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1cget9h_di" bpmnElement="Flow_1cget9h">
+        <di:waypoint x="480" y="492" />
+        <di:waypoint x="480" y="540" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="490" y="500" width="60" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1w5o951_di" bpmnElement="Flow_1w5o951">
+        <di:waypoint x="530" y="580" />
+        <di:waypoint x="552" y="580" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1njgc6c_di" bpmnElement="Flow_1njgc6c">
         <di:waypoint x="970" y="580" />

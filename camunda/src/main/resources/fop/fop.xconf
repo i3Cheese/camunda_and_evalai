@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<fop>
+	<renderers>
+		<renderer mime="application/pdf">
+			<fonts>
+				<font kerning="yes"  embed-url="file:////home/deck/projects/camunda_and_evalai/fop-2.9/fop/Roboto/Roboto-Regular.ttf">
+					<font-triplet name="Roboto" style="normal" weight="normal"/>
+				</font>
+				<font kerning="yes"  embed-url="file:////home/deck/projects/camunda_and_evalai/fop-2.9/fop/Roboto/Roboto-Bold.ttf">
+					<font-triplet name="Roboto" style="normal" weight="bold"/>
+				</font>
+			</fonts>
+		</renderer>
+	</renderers>
+</fop> 

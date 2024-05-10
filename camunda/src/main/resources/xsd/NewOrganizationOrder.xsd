@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+	<xs:element name="newOrganizationOrder">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="organizationInfo">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="name" type="xs:string" />
+							<xs:element name="address" type="xs:string" />
+							<xs:element name="phone" type="xs:string" />
+							<xs:element name="email" type="xs:string" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="organizationContactPerson">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="name" type="xs:string" />
+							<xs:element name="position" type="xs:string" />
+							<xs:element name="phone" type="xs:string" />
+							<xs:element name="email" type="xs:string" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="signer">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="name" type="xs:string" />
+							<xs:element name="position" type="xs:string" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="orderDate" type="xs:date" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
