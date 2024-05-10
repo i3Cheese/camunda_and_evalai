@@ -28,6 +28,10 @@
 			<fo:block>Телефон: <xsl:value-of select="organizationInfo/phone"/></fo:block>
 			<fo:block>Email: <xsl:value-of select="organizationInfo/email"/></fo:block>
 
+			<fo:block font-weight="bold">Публичная информация:</fo:block>
+			<fo:block>Название: <xsl:value-of select="publicInformation/name"/></fo:block>
+			<fo:block>URL: <xsl:value-of select="publicInformation/url"/></fo:block>
+
 			<fo:block font-weight="bold">Представитель организации:</fo:block>
 			<fo:block>ФИО: <xsl:value-of select="organizationContactPerson/name"/></fo:block>
 			<fo:block>Должность: <xsl:value-of select="organizationContactPerson/position"/></fo:block>

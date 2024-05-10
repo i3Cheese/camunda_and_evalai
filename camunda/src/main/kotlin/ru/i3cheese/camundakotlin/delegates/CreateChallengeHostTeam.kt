@@ -17,14 +17,12 @@ class CreateChallengeHostTeam: JavaDelegate {
     @Serializable
     private data class ChallengeHostTeamBody(val team_name: String, val team_url: String)
     override fun execute(execution: DelegateExecution) {
-        println("hi");
-        return
-        val obj = XMLUtils.unmarshal<ru.i3cheese.camundakotlin.xml.genmodel.Root>("something");
-        val teamName: String = execution.getVariableTyped<StringValue>("teamName", true).value;
-        println("Creating team $teamName")
+        val teamName: String = execution.getVariableTyped<StringValue>("teamName", true).value
+        val teamUrl: String = execution.getVariableTyped<StringValue>("teamUrl", true).value
+        println("Creating team $teamName with url $teamUrl")
         val response = EvalAISession.doPost("/api/hosts/challenge_host_team/",
             Json.encodeToString(
-                ChallengeHostTeamBody(teamName, "test_team_url")
+                ChallengeHostTeamBody(teamName, teamUrl)
             )
         )
         println(response)
