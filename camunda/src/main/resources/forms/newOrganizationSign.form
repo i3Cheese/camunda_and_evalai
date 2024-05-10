@@ -1,0 +1,51 @@
+{
+  "components": [
+    {
+      "text": "# Xml документ приказа\n```\n{{xmlNewOrganizationOrder}}\n```",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_1pmupms",
+        "columns": null
+      },
+      "id": "Field_0q0md8g",
+      "properties": {}
+    },
+    {
+      "label": "Подписать",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_1og22ic",
+        "columns": null
+      },
+      "id": "Field_1miqnil",
+      "key": "signed"
+    },
+    {
+      "label": "Причина отказа",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1rxr5k1",
+        "columns": null
+      },
+      "id": "Field_144ar5c",
+      "key": "rejectionReason",
+      "conditional": {
+        "hide": "=signed"
+      },
+      "validate": {
+        "required": false
+      },
+      "defaultValue": "Отказ по семейным обстоятельствам"
+    }
+  ],
+  "type": "default",
+  "id": "newOrganizationSign",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.19.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.20.0",
+  "schemaVersion": 14
+}
