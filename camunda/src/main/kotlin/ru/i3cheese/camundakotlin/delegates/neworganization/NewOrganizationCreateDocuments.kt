@@ -1,4 +1,4 @@
-package ru.i3cheese.camundakotlin.delegates
+package ru.i3cheese.camundakotlin.delegates.neworganization
 
 import io.minio.MakeBucketArgs
 import io.minio.MinioClient
@@ -31,7 +31,10 @@ class NewOrganizationCreateDocuments: JavaDelegate {
         val newOrganizationApplication = XMLUtils.unmarshal<ru.i3cheese.camundakotlin.xml.genmodel.NewOrganizationApplication>(
             xmlNewOrganizationApplication
         );
+        val teamName = newOrganizationApplication.publicInformation.name
+
         val newOrganizationOrder = ru.i3cheese.camundakotlin.xml.genmodel.NewOrganizationOrder();
+        // Filling data...
         newOrganizationOrder.organizationInfo = ru.i3cheese.camundakotlin.xml.genmodel.NewOrganizationOrder.OrganizationInfo();
         newOrganizationOrder.organizationInfo.name = newOrganizationApplication.organizationInfo.name;
         newOrganizationOrder.organizationInfo.email = newOrganizationApplication.organizationInfo.email;
@@ -59,39 +62,34 @@ class NewOrganizationCreateDocuments: JavaDelegate {
         val tmpDir = kotlin.io.path.createTempDirectory("NewOrganizationCreateDocuments")
         val xmlFile = tmpDir.resolve("NewOrganizationOrder.xml");
         xmlFile.toFile().writeText(xmlNewOrganizationOrder);
-        val pdfFile = tmpDir.resolve("NewOrganizationOrder.pdf");
-        println("xmlFile: $xmlFile")
-        println("pdfFile: $pdfFile")
-        // run process
+        val time = Instant.now().toString()
+        val pdfFile = tmpDir.resolve("NewOrganizationOrder_${teamName}_${time}.pdf");
         val fopFactory: FopFactory = FopFactory.newInstance(
-            // this::class.java.classLoader.getResource("/fop/fop.xconf")!!.toURI()
-            // TODO: up thing doesnt render font but down thing does but not use resource
             File("src/main/resources/fop/fop.xconf"),
         )
-
 
         val out: OutputStream = BufferedOutputStream(FileOutputStream(pdfFile.toFile()))
 
         out.use { out ->
             val fop = fopFactory.newFop(MimeConstants.MIME_PDF, out)
             val factory = TransformerFactory.newInstance()
-            val xslt: Source = StreamSource(this::class.java.classLoader.getResource("/xsl/NewOrganizationOrder.xsl")!!.openStream())
+            val xslt: Source = StreamSource(
+                this::class.java.classLoader.getResource("/xsl/NewOrganizationOrder.xsl")!!.openStream()
+            )
             val transformer = factory.newTransformer(xslt)
             val src: Source = StreamSource(xmlFile.toFile())
             val res: Result = SAXResult(fop.defaultHandler)
             transformer.transform(src, res)
         }
+
+
         val minioClient =
             MinioClient.builder()
                 .endpoint("http://127.0.0.1:9000")
                 .credentials("minioadmin", "minioadmin")
                 .build()
-        minioClient.makeBucket(
-            MakeBucketArgs
-                .builder()
-                .bucket("documents")
-                .build());
-        minioClient.putObject(
+
+        val uploadResponse = minioClient.putObject(
             PutObjectArgs
             .builder()
             .bucket("documents")
@@ -100,7 +98,11 @@ class NewOrganizationCreateDocuments: JavaDelegate {
             .build()
         )
 
+
+        uploadResponse.etag()
+
         execution.setVariable("xmlNewOrganizationOrder", xmlNewOrganizationOrder);
+        execution.setVariable("pdfDocumentName", pdfFile.fileName.toString());
 
         execution.setVariable("teamName", newOrganizationApplication.publicInformation.name);
         execution.setVariable("teamUrl", newOrganizationApplication.publicInformation.url);

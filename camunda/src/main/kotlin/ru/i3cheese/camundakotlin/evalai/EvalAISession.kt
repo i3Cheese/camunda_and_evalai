@@ -7,23 +7,21 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 
-object EvalAISession {
-    @Serializable
-    private data class AuthBody(val username: String, val password: String)
+interface EvalAISessionInt {
+    fun doPost(url: String, data: String): String
+    fun doGet(url: String): String
+}
 
-    private var token: String = ""
-    private val client = OkHttpClient()
-    private const val baseUrl = "http://localhost:8000"
+object EvalAISession : EvalAISessionInt {
     init {
         doAuth()
     }
 
     private fun doAuth() {
-        println("HELLO FROM INIT")
         val url = "$baseUrl/api/auth/login/"
 
         val data = Json.encodeToString(
-            AuthBody("admin", "password")
+            AuthBody(username, password)
         )
         println(data)
         val request = Request.Builder()
@@ -33,19 +31,14 @@ object EvalAISession {
         try {
             val response = client.newCall(request).execute()
             val body = response.body?.string()!!
-            println("auth")
-            println(body)
-
             token = Json.parseToJsonElement(body).jsonObject["token"]!!.jsonPrimitive.content
-            println("TOKEN: $token")
-//            doGet("/api/accounts/user/get_auth_token")
         } catch (e: Exception) {
             token = ""
             println(e)
         }
     }
 
-    fun doPost(url: String, data: String): String {
+    override fun doPost(url: String, data: String): String {
         if (token == "") {
             doAuth()
         }
@@ -56,6 +49,9 @@ object EvalAISession {
             .build()
         try {
             val response = client.newCall(request).execute()
+            if (!response.isSuccessful) {
+                throw Exception("Response code: ${response.code}")
+            }
             val body = response.body?.string()!!
             println("DOPOST $url")
             println(body)
@@ -65,7 +61,7 @@ object EvalAISession {
             return "" 
         }
     }
-    fun doGet(url: String): String {
+    override fun doGet(url: String): String {
         if (token == "") {
             doAuth()
         }
@@ -85,4 +81,13 @@ object EvalAISession {
             return ""
         }
     }
+
+    @Serializable
+    private data class AuthBody(val username: String, val password: String)
+
+    private var token: String = ""
+    private val client = OkHttpClient()
+    private const val baseUrl = "http://localhost:8000"
+    private const val username = "admin"
+    private const val password = "password"
 }

@@ -1,7 +1,7 @@
 {
   "components": [
     {
-      "text": "# Xml документ приказа\n```\n{{xmlNewOrganizationOrder}}\n```",
+      "text": "# Xml документ приказа\n```\n{{xmlNewOrganizationOrder}}\n```\n\nНазвания файла: {{pdfDocumentName}}",
       "label": "Text view",
       "type": "text",
       "layout": {

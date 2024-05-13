@@ -1,13 +1,9 @@
-package ru.i3cheese.camundakotlin.delegates
+package ru.i3cheese.camundakotlin.delegates.neworganization
 
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import org.camunda.bpm.engine.delegate.DelegateExecution
 import org.camunda.bpm.engine.delegate.JavaDelegate
 import org.camunda.bpm.engine.variable.value.StringValue
 import org.springframework.stereotype.Component
-import ru.i3cheese.camundakotlin.evalai.EvalAISession
 import ru.i3cheese.camundakotlin.xml.utils.XMLUtils
 
 
@@ -23,9 +19,10 @@ class CheckNewOrganizationApplication: JavaDelegate {
         } catch (e: Exception) {
             println("Error unmarshalling xmlNewOrganizationApplication: $e")
             execution.setVariable("approved", false)
-            execution.setVariable("rejectionReason", "Bad XML")
+            execution.setVariable("rejectionReason", "Bad XML of application. Check the compliance with the scheme.")
             return
         }
+        // Here can be actual check of some internal data of newOrganizationApplication
         execution.setVariable("approved", true)
     }
 }

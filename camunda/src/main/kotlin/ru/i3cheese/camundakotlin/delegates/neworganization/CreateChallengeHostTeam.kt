@@ -1,4 +1,4 @@
-package ru.i3cheese.camundakotlin.delegates
+package ru.i3cheese.camundakotlin.delegates.neworganization
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
@@ -6,10 +6,8 @@ import kotlinx.serialization.json.Json
 import org.camunda.bpm.engine.delegate.DelegateExecution
 import org.camunda.bpm.engine.delegate.JavaDelegate
 import org.camunda.bpm.engine.variable.value.StringValue
-import org.camunda.bpm.engine.variable.value.TypedValue
 import org.springframework.stereotype.Component
 import ru.i3cheese.camundakotlin.evalai.EvalAISession
-import ru.i3cheese.camundakotlin.xml.utils.XMLUtils
 
 
 @Component
